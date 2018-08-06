@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Domain.Employee>
+
+@{
+   // ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@foreach (var item in Model)
+{
+    <div>
+        @item.FirstName  @item.LastName  @item.Department.DepartmentTitle  @item.Department.Organization.OrganizationTitle
+    </div>
+}
