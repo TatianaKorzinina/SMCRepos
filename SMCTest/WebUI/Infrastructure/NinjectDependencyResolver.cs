@@ -6,7 +6,8 @@ using Ninject;
 using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Concrete;
-
+using WebUI.Infrastructure.Abstract;
+using WebUI.Infrastructure.Concrete;
 namespace WebUI.Infrastructure
 {
     public class NinjectDependencyResolver : IDependencyResolver
@@ -31,6 +32,7 @@ namespace WebUI.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IRepository>().To<Repository>();
+            kernel.Bind<IAuthProvider>().To<AuthProvidercs>();
         }
     }
 }

@@ -6,7 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace WebUI.Controllers
-{
+{   
+    [Authorize]
     public class HomeController : Controller
     {
         private IRepository repository;
