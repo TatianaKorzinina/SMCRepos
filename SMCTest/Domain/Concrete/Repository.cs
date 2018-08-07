@@ -9,19 +9,19 @@ namespace Domain.Concrete
 {
     public class Repository : IRepository
     {
-        public IEnumerable<Employee> Employers
+        public IEnumerable<Employee> Employers()
         {
-            get
-            {
-                var context = new SMCContext();
+            
+            
+               using (var context = new SMCContext())
                     {
                     var res = context.Employes
                    .Include("Department")
-                   .Include("Department.Organization");
+                   .Include("Department.Organization").ToList();
                     return res;
                     };
                 
-            }
+            
         }
     }
 }

@@ -11,16 +11,20 @@ namespace WebUI.Controllers
     public class HomeController : Controller
     {
         private IRepository repository;
-
+        public int pageSise = 4;
+        
         public HomeController(IRepository repo)
         {
             repository = repo;
         }
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(int page=1)
         {
-            var result = repository.Employers;
+            var result = repository.Employers().Skip((page-1)*pageSise)
+                .Take(pageSise);
+            ViewBag.TotalPages = (int)Math.Ceiling((decimal) repository.Employers().ToArray().Length / pageSise);
             return View(result);
+            
         }
     }
 }

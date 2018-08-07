@@ -8,6 +8,6 @@ namespace Domain.Abstract
 {
     public interface IRepository
     {
-        IEnumerable<Employee> Employers { get; }
+        IEnumerable<Employee> Employers();
     }
 }
