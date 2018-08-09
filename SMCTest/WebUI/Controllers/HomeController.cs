@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {   
@@ -18,13 +19,19 @@ namespace WebUI.Controllers
             repository = repo;
         }
         // GET: Home
-        public ActionResult Index(int page=1)
+        public ActionResult Index(SearchModel sear ,int page=1 )
         {
-            var result = repository.Employers().Skip((page-1)*pageSise)
-                .Take(pageSise);
-            ViewBag.TotalPages = (int)Math.Ceiling((decimal) repository.Employers().ToArray().Length / pageSise);
-            return View(result);
-            
+            ViewBag.p = page;
+           var res = repository.Employers()
+               .Where(x => sear.SearchI == null ? x == x : x.FirstName.ToLower().Contains(sear.SearchI.ToLower())
+               || x.MiddleName.ToLower().Contains(sear.SearchI.ToLower())
+               || x.LastName.ToLower().Contains(sear.SearchI.ToLower()));
+            sear.Employes = res
+               .Skip((page - 1) * pageSise)
+               .Take(pageSise);
+            ViewBag.TotalPages = (int)Math.Ceiling((decimal) res.ToArray().Length / pageSise);
+            return View(sear);
+           
         }
     }
 }

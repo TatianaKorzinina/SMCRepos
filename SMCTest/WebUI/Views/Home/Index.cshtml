@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Domain.Employee>
+﻿@model WebUI.Models.SearchModel
 
 @{
-   // ViewBag.Title = "Index";
+    // ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
@@ -13,14 +13,11 @@
             </a>
         </li>
         @for (int i = 1; i <= ViewBag.TotalPages; i++)
-    {
-        <li><a href="http://localhost:55182/Home/Index/page @i">@i</a></li>
-    }
-        @*<li><a href="http://localhost:55182/Home/Index/page1">1</a></li>
-        <li><a href="http://localhost:55182/Home/Index/page2">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>*@
+        {
+            <li><a class=
+                   @(ViewBag.p == i ? "btn btn-primary " : "btn-default")  href="http://localhost:55182/Home/Index/page @i">@i</a></li>
+        }
+       
         <li>
             <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -29,9 +26,45 @@
     </ul>
 </nav>
 
-@foreach (var item in Model)
+@using (Html.BeginForm())
 {
+
     <div>
-        @item.FirstName  @item.LastName  @item.Department.DepartmentTitle  @item.Department.Organization.OrganizationTitle
+        <label>Поиск сотрудника:</label>
+        @Html.TextBoxFor( m =>m.SearchI , new { @class = "form-control" })
     </div>
+
+    <input type="submit" value="Search" class="btn btn-primary" />
 }
+
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Имя</th>  
+                <th>Отчество</th>  
+                <th>Фамилия</th>  
+                <th>Название подразделения</th>       
+                <th>Название организации</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Employes)
+    {
+        <tr>
+
+            <td>@item.FirstName </td>
+            <td>@item.MiddleName</td>
+            <td>@item.LastName</td>
+            <td>@item.Department.DepartmentTitle</td>
+            <td>@item.Department.Organization.OrganizationTitle</td>
+            <td><a class="btn btn-warning" href="#" role="button">редактировать</a> </td>
+        </tr>
+}
+
+        </tbody>
+    </table>
+</div>
+
+

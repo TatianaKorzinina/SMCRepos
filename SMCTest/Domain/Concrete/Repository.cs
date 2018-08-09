@@ -23,5 +23,24 @@ namespace Domain.Concrete
                 
             
         }
+
+        public void EditEmployer(Employee employee)
+        {
+            using (var context = new SMCContext())
+            {
+                var emp = context.Employes.Find(employee.EmployeeId);
+                    
+                    
+                if (emp != null)
+                {
+                    emp.FirstName = employee.FirstName;
+                    emp.MiddleName = employee.MiddleName;
+                    emp.LastName = employee.LastName;
+                    emp.Department = employee.Department;
+                }
+                context.SaveChanges();
+            }
+
+        }
     }
 }
