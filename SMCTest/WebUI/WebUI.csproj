@@ -141,7 +141,6 @@
     <Compile Include="Infrastructure\Concrete\AuthProvidercs.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\Sear1.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -153,7 +152,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Search\View.cshtml" />
+    <Content Include="Views\Redactor\Edit.cshtml" />
+    <Content Include="Views\Redactor\Completed.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -163,7 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Redactor\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">

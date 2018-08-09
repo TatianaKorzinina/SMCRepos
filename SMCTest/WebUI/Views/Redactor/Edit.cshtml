@@ -1,0 +1,30 @@
+﻿@model Domain.Employee
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<div>
+    <label>Имя</label>
+    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+</div>
+<div>
+    <label>Отчество</label>
+    @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+</div>
+<div>
+    <label>Фамилия</label>
+    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+</div>
+<div>
+    <label>Email</label>
+    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+</div>
+
+<input type="submit" value="сохранить" />
+@Html.ActionLink("вернуться к списку сотрудников без сохранения",
+                "Index", "Home", null, new { @class = "btn btn-primary" })
+}
