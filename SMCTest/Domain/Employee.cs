@@ -13,13 +13,15 @@ namespace Domain
     {
         [HiddenInput(DisplayValue =false)]
         public int EmployeeId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "введите имя")]
         public string FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "введите отчество")]
         public string MiddleName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "введите фамилию")]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "введите адрес электронной почты")]
+        [RegularExpression(".+\\@.+\\..+", 
+            ErrorMessage ="введите действительный адрес электронной почты")]
         public string Email { get; set; }
         //[Required]
         //public Organization Organization { get; set; }

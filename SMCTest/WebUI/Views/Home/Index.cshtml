@@ -4,25 +4,25 @@
     // ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Список сотрудников</h2>
 <nav aria-label="Page navigation">
     <ul class="pagination">
-        <li>
+        @*<li>
             <a href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
-        </li>
+        </li>*@
         @for (int i = 1; i <= ViewBag.TotalPages; i++)
         {
             <li><a class=
-                   @(ViewBag.p == i ? "btn btn-primary " : "btn-default")  href="http://localhost:55182/Home/Index/page @i">@i</a></li>
+                   @(ViewBag.p == i ? "btn btn-primary" : "btn-default")  href="http://localhost:55182/Home/Index/page @i">@i</a></li>
         }
        
-        <li>
+        @*<li>
             <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
-        </li>
+        </li>*@
     </ul>
 </nav>
 
@@ -39,7 +39,7 @@
 
 
 <div>
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Имя</th>
@@ -62,7 +62,7 @@
                 <td>@item.Email</td>
                 <td>@item.Department.DepartmentTitle</td>
                 <td>@item.Department.Organization.OrganizationTitle</td>
-                <td>@Html.ActionLink("редактировать", "Edit", "Redactor", new { item.EmployeeId, }, new { @class = "btn btn-warning" })</td>
+                <td>@Html.ActionLink("редактировать", "Edit", "Redactor", new {EmployeeId= item.EmployeeId, }, new { @class = "btn btn-warning" })</td>
             </tr>
 }
 

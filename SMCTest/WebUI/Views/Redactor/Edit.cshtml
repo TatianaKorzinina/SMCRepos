@@ -11,6 +11,7 @@
     <label>Имя</label>
     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
 </div>
+    //@Html.ValidationMessage()
 <div>
     <label>Отчество</label>
     @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
@@ -24,7 +25,7 @@
     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
 </div>
 
-<input type="submit" value="сохранить" />
+<input class="btn btn-danger" type ="submit" value="сохранить" />
 @Html.ActionLink("вернуться к списку сотрудников без сохранения",
                 "Index", "Home", null, new { @class = "btn btn-primary" })
 }

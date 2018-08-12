@@ -36,7 +36,7 @@ namespace Domain.Concrete
                     emp.FirstName = employee.FirstName;
                     emp.MiddleName = employee.MiddleName;
                     emp.LastName = employee.LastName;
-                    //emp.Department = employee.Department;
+                    emp.Email = employee.Email;
                 }
                 context.SaveChanges();
             }

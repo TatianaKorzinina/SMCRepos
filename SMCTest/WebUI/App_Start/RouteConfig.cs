@@ -17,6 +17,10 @@ namespace WebUI
                 name: null,
                 url: "{controller}/{action}/page {page}"
                 );
+            routes.MapRoute(
+                name: null,
+                url: "{controller}/{action}/{EmployeeId}"
+                );
 
             routes.MapRoute(
                 name: "Default",
