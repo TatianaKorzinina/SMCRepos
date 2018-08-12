@@ -9,7 +9,8 @@ namespace Domain.Abstract
     public interface IRepository
     {
         IEnumerable<Employee> Employers();
-
+        IEnumerable<Department> Departments();
+        IEnumerable<Organization> Organizations();
          void EditEmployer(Employee employee);
     }
 

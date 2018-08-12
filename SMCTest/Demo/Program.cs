@@ -17,16 +17,19 @@ namespace Demo
 
         static void CreateTable()
         {
-            var org = new Organization { OrganizationTitle = "SMC Pneumatik", };
+            
             using (var context = new SMCContext())
             {
-                var res = context.Employes
-                    .Include("Department")
-                    .Include("Department.Organization");
-                foreach (var r in res)
+                var emp = new Employee
                 {
-                    Console.WriteLine(r.FirstName + " " + r.LastName + " " + r.Department.DepartmentTitle + " " + r.Department.Organization.OrganizationTitle);
-                }
+                    FirstName = "anna",
+                    MiddleName = "Maria",
+                    LastName = "West",
+                    Email = "as@na.ru",
+                    Department = context.Departments.Find(1)
+                };
+                context.Employes.Add(emp);
+                context.SaveChanges();
             }
         }
     }

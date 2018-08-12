@@ -24,6 +24,25 @@ namespace Domain.Concrete
             
         }
 
+        public IEnumerable<Department> Departments()
+        {
+            using (var context = new SMCContext())
+            {
+                var res = context.Departments
+              .Include("Organization").ToList();
+                return res;
+            };
+        }
+
+        public IEnumerable<Organization> Organizations()
+        {
+            using (var context = new SMCContext())
+            {
+                var res = context.Organizations.ToList();
+                return res;
+            };
+        }
+
         public void EditEmployer(Employee employee)
         {
             using (var context = new SMCContext())
@@ -37,6 +56,7 @@ namespace Domain.Concrete
                     emp.MiddleName = employee.MiddleName;
                     emp.LastName = employee.LastName;
                     emp.Email = employee.Email;
+                    emp.Department =employee.Department ;
                 }
                 context.SaveChanges();
             }
