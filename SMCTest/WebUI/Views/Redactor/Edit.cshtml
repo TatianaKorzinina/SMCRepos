@@ -8,6 +8,11 @@
 @using (Html.BeginForm())
 {@Html.ValidationSummary()
 <div>
+    @*<label>Имя</label>*@
+    @Html.TextBoxFor(m => m.Employee.EmployeeId, new { @type = "hidden" })
+</div>
+
+<div>
     <label>Имя</label>
     @Html.TextBoxFor(m => m.Employee.FirstName, new { @class = "form-control" })
 </div>
@@ -27,7 +32,7 @@
 <div>
     <label>подразделение</label>
     @Html.DropDownListFor(n => n.DepId ,
-    new SelectList(Model.Departments, "DepartmentId", "DepartmentTitle"),
+    new SelectList(Model.Departments, "DepartmentId", "DepartmentTitle"),Model.Employee.Department.DepartmentTitle,
      new { @class = "form-control" })
 </div>
 

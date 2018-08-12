@@ -26,8 +26,8 @@ namespace WebUI.Controllers
             {
                 Employee = employee,
                 Departments = repository.Departments().ToList(),
-                Organizations=repository.Organizations().ToList(),
-            };
+                Organizations=repository.Organizations().ToList(), 
+        };
 
           
             return View(editEmployersModel);
@@ -37,10 +37,11 @@ namespace WebUI.Controllers
         {
             var dep = repository.Departments()
             .FirstOrDefault(x => x.DepartmentId == emp.DepId);
-            Employee employee = emp.Employee;
-            employee.Department = dep;
+            Employee employee = emp.Employee;  
+            employee.Department= dep;
             repository.EditEmployer(employee);
             return View("Completed");
+            
         }
     }
 }

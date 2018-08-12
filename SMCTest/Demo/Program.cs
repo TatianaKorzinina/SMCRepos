@@ -22,10 +22,10 @@ namespace Demo
             {
                 var emp = new Employee
                 {
-                    FirstName = "anna",
-                    MiddleName = "Maria",
-                    LastName = "West",
-                    Email = "as@na.ru",
+                    FirstName = "Лиза",
+                    MiddleName = "Алексеевна",
+                    LastName = "Ефимова",
+                    Email = "вава@na.ru",
                     Department = context.Departments.Find(1)
                 };
                 context.Employes.Add(emp);

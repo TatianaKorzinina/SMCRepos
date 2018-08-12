@@ -56,7 +56,7 @@ namespace Domain.Concrete
                     emp.MiddleName = employee.MiddleName;
                     emp.LastName = employee.LastName;
                     emp.Email = employee.Email;
-                    emp.Department =employee.Department ;
+                    emp.Department = context.Departments.Find(keyValues: employee.Department.DepartmentId);
                 }
                 context.SaveChanges();
             }
