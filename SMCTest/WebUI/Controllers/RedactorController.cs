@@ -22,24 +22,41 @@ namespace WebUI.Controllers
         {
             Employee employee = repository.Employers()
                  .FirstOrDefault(x => x.EmployeeId == employeeId);
-            EditEmployersModel editEmployersModel = new EditEmployersModel
-            {
-                Employee = employee,
-                Departments = repository.Departments().ToList(),
-                Organizations=repository.Organizations().ToList(), 
-        };
+        //    EditEmployersModel editEmployersModel = new EditEmployersModel
+        //    {
+        //        Employee = employee,
+        //        Departments = repository.Departments().ToList(),
+        //        Organizations=repository.Organizations().ToList(), 
+        //};
 
-          
-            return View(editEmployersModel);
+            ViewBag.Org=repository.Organizations();
+            ViewBag.Dep = repository.Departments()
+                .Where(x=>x.Organization.OrganizationID==employee.Department.Organization.OrganizationID);
+            ViewBag.OrgId = 0;
+            ViewBag.DepId = 0;
+            return View(employee);
         }
-        [HttpPost]
-        public ActionResult Edit(EditEmployersModel emp)
+
+        public ActionResult GetDepartments(int orgId)
         {
+            var res = repository.Departments()
+                .Where(x => x.Organization.OrganizationID == orgId)
+                .ToList();
+            return PartialView(res);
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(Employee emp)
+        {
+            //var org = repository.Organizations()
+            //    .FirstOrDefault(x => x.OrganizationID == ViewBag.OrgId  );
             var dep = repository.Departments()
-            .FirstOrDefault(x => x.DepartmentId == emp.DepId);
-            Employee employee = emp.Employee;  
-            employee.Department= dep;
-            repository.EditEmployer(employee);
+            .FirstOrDefault(x => x.DepartmentId == ViewBag.DepId);
+            
+            emp.Department= dep;
+            
+            repository.EditEmployer(emp);
             return View("Completed");
             
         }

@@ -1,4 +1,8 @@
-﻿@model WebUI.Models.EditEmployersModel
+﻿@using Domain
+@model Employee
+
+
+
 
 @{
     ViewBag.Title = "Edit";
@@ -9,34 +13,70 @@
 {@Html.ValidationSummary()
 <div>
     @*<label>Имя</label>*@
-    @Html.TextBoxFor(m => m.Employee.EmployeeId, new { @type = "hidden" })
+    @Html.TextBoxFor(m => m.EmployeeId , new { @type = "hidden" })
 </div>
 
 <div>
     <label>Имя</label>
-    @Html.TextBoxFor(m => m.Employee.FirstName, new { @class = "form-control" })
+    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
 </div>
 <div>
     <label>Отчество</label>
-    @Html.TextBoxFor(m => m.Employee.MiddleName, new { @class = "form-control" })
+    @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
 </div>
 <div>
     <label>Фамилия</label>
-    @Html.TextBoxFor(m => m.Employee.LastName, new { @class = "form-control" })
+    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
 </div>
 <div>
     <label>Email</label>
-    @Html.TextBoxFor(m => m.Employee.Email, new { @class = "form-control" })
+    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", })
 </div>
+
+
+<div>
+        <label>организация</label>
+        @Html.DropDownList("Organization",
+            new SelectList(ViewBag.Org , "OrganizationId", "OrganizationTitle"),
+            Model.Department.Organization.OrganizationTitle,
+             new { @class = "form-control", id="org" })
+    </div>
+
+
+
+
 
 <div>
     <label>подразделение</label>
-    @Html.DropDownListFor(n => n.DepId ,
-    new SelectList(Model.Departments, "DepartmentId", "DepartmentTitle"),Model.Employee.Department.DepartmentTitle,
-     new { @class = "form-control" })
+    @Html.DropDownList("ViewBag.DepId",
+        new SelectList(ViewBag.Dep, "DepartmentId", "DepartmentTitle"), Model.Department.DepartmentTitle,
+         new { @class = "form-control",id="dep" })
 </div>
 
 <input class="btn btn-danger" type="submit" value="сохранить" />
 @Html.ActionLink("вернуться к списку сотрудников без сохранения",
                 "Index", "Home", null, new { @class = "btn btn-primary" })
 }
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#org').change(function () {
+            // получаем выбранный id
+            var orgId = $(this).val();
+
+            
+            $.ajax({
+                type: 'Get',
+                url: '@Url.Action("GetDepartments", new { orgId = 0 })' + orgId ,
+               // url: '/Redactor/GetDepartments/1',
+                success: function (data) {
+
+                    // заменяем содержимое присланным частичным представлением
+                    $('#dep').replaceWith(data);
+                }
+            });
+        });
+    })
+</script>
+    

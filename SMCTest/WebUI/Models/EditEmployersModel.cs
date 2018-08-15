@@ -16,6 +16,7 @@ namespace WebUI.Models
 
         public List<Organization> Organizations { get; set; }
         public int DepId { get; set; }
-       
+        public int OrgId { get; set; }
+
     }
 }
