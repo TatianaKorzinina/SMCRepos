@@ -22,19 +22,17 @@ namespace WebUI.Controllers
         {
             Employee employee = repository.Employers()
                  .FirstOrDefault(x => x.EmployeeId == employeeId);
-        //    EditEmployersModel editEmployersModel = new EditEmployersModel
-        //    {
-        //        Employee = employee,
-        //        Departments = repository.Departments().ToList(),
-        //        Organizations=repository.Organizations().ToList(), 
-        //};
+            EditEmployersModel editEmployersModel = new EditEmployersModel
+            {
+                Employee = employee,
+                
+            };
 
             ViewBag.Org=repository.Organizations();
             ViewBag.Dep = repository.Departments()
                 .Where(x=>x.Organization.OrganizationID==employee.Department.Organization.OrganizationID);
-            ViewBag.OrgId = 0;
-            ViewBag.DepId = 0;
-            return View(employee);
+            
+            return View(editEmployersModel);
         }
 
         public ActionResult GetDepartments(int orgId)
@@ -47,16 +45,17 @@ namespace WebUI.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(Employee emp)
+        public ActionResult Edit(EditEmployersModel emp)
         {
+
             //var org = repository.Organizations()
             //    .FirstOrDefault(x => x.OrganizationID == ViewBag.OrgId  );
             var dep = repository.Departments()
-            .FirstOrDefault(x => x.DepartmentId == ViewBag.DepId);
+            .FirstOrDefault(x => x.DepartmentId == emp.DepId);
+            Employee employee = emp.Employee;
+            employee.Department= dep;
             
-            emp.Department= dep;
-            
-            repository.EditEmployer(emp);
+            repository.EditEmployer(employee);
             return View("Completed");
             
         }

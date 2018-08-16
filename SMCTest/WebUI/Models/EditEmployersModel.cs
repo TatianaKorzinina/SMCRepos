@@ -12,11 +12,9 @@ namespace WebUI.Models
     {  
         public Employee Employee { get; set; }
 
-        public IEnumerable<Department> Departments { get; set; }
-
-        public List<Organization> Organizations { get; set; }
+        
         public int DepId { get; set; }
-        public int OrgId { get; set; }
+        
 
     }
 }
