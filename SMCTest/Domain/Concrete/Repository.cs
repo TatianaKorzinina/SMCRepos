@@ -49,14 +49,26 @@ namespace Domain.Concrete
             {
                 var emp = context.Employes.Find(employee.EmployeeId);
 
+                Log log = new Log();
+                
 
                 if (emp != null)
                 {
-                    emp.FirstName = employee.FirstName;
+                    if (emp.FirstName != employee.FirstName)
+                    {
+                        log.FirstName = emp.FirstName;
+                        emp.FirstName = employee.FirstName;
+                        
+                    }
                     emp.MiddleName = employee.MiddleName;
                     emp.LastName = employee.LastName;
                     emp.Email = employee.Email;
                     emp.Department = context.Departments.Find(keyValues: employee.Department.DepartmentId);
+                    if (log != null)
+                    {
+                        log.dateTime = DateTime.Now;
+                        context.Logs.Add(log);
+                    }
                     context.SaveChanges();
                 }
                 else CreateEmployee(employee);
@@ -83,5 +95,7 @@ namespace Domain.Concrete
             }
 
         }
+
+        
     }
 }

@@ -72,6 +72,8 @@
     <Compile Include="Concrete\Repository.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="LogType.cs" />
     <Compile Include="Migrations\201808061313279_InitialCreate.cs" />
     <Compile Include="Migrations\201808061313279_InitialCreate.Designer.cs">
       <DependentUpon>201808061313279_InitialCreate.cs</DependentUpon>
@@ -79,6 +81,22 @@
     <Compile Include="Migrations\201808091425586_AddDomainEmail.cs" />
     <Compile Include="Migrations\201808091425586_AddDomainEmail.Designer.cs">
       <DependentUpon>201808091425586_AddDomainEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808161946063_AddLogTypeClass.cs" />
+    <Compile Include="Migrations\201808161946063_AddLogTypeClass.Designer.cs">
+      <DependentUpon>201808161946063_AddLogTypeClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808161947233_AddLogClass.cs" />
+    <Compile Include="Migrations\201808161947233_AddLogClass.Designer.cs">
+      <DependentUpon>201808161947233_AddLogClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808161958423_AddLogTypeClass1.cs" />
+    <Compile Include="Migrations\201808161958423_AddLogTypeClass1.Designer.cs">
+      <DependentUpon>201808161958423_AddLogTypeClass1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808161958537_AddLogClass1.cs" />
+    <Compile Include="Migrations\201808161958537_AddLogClass1.Designer.cs">
+      <DependentUpon>201808161958537_AddLogClass1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
@@ -95,6 +113,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808091425586_AddDomainEmail.resx">
       <DependentUpon>201808091425586_AddDomainEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808161946063_AddLogTypeClass.resx">
+      <DependentUpon>201808161946063_AddLogTypeClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808161947233_AddLogClass.resx">
+      <DependentUpon>201808161947233_AddLogClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808161958423_AddLogTypeClass1.resx">
+      <DependentUpon>201808161958423_AddLogTypeClass1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808161958537_AddLogClass1.resx">
+      <DependentUpon>201808161958537_AddLogClass1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

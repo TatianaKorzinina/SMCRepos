@@ -12,6 +12,7 @@ namespace Domain
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employes { get; set; }
-
+        public DbSet<LogType> LogTypes { get; set; }
+        public DbSet<Log> Logs { get; set; }
     }
 }

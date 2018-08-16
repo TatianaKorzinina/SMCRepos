@@ -20,15 +20,12 @@ namespace Demo
             
             using (var context = new SMCContext())
             {
-                var emp = new Employee
+                var emp = new Log
                 {
                     FirstName = "Лиза",
-                    MiddleName = "Алексеевна",
-                    LastName = "Ефимова",
-                    Email = "вава@na.ru",
-                    Department = context.Departments.Find(1)
+                    
                 };
-                context.Employes.Add(emp);
+                //context.Log.Add(emp);
                 context.SaveChanges();
             }
         }
