@@ -48,8 +48,8 @@ namespace Domain.Concrete
             using (var context = new SMCContext())
             {
                 var emp = context.Employes.Find(employee.EmployeeId);
-                    
-                    
+
+
                 if (emp != null)
                 {
                     emp.FirstName = employee.FirstName;
@@ -57,8 +57,29 @@ namespace Domain.Concrete
                     emp.LastName = employee.LastName;
                     emp.Email = employee.Email;
                     emp.Department = context.Departments.Find(keyValues: employee.Department.DepartmentId);
+                    context.SaveChanges();
                 }
+                else CreateEmployee(employee);
+                
+            }
+
+        }
+        public void CreateEmployee(Employee employee)
+        {
+            using (var context = new SMCContext())
+            {
+                var emp = new Employee
+                {
+                    FirstName = employee.FirstName,
+                    MiddleName = employee.MiddleName,
+                    LastName = employee.LastName,
+                    Email = employee.Email,
+                    Department = context.Departments.Find(keyValues: employee.Department.DepartmentId)
+                };
+                context.Employes.Add(emp);
                 context.SaveChanges();
+
+
             }
 
         }

@@ -1,6 +1,6 @@
 ﻿@using Domain
 @model List<Department>
 
-@Html.DropDownList("DepId",
+@Html.DropDownList("Department.DepartmentId",
         new SelectList(Model , "DepartmentId", "DepartmentTitle"),
          new { @class = "form-control", id= "dep" })

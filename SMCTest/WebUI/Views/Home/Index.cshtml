@@ -62,12 +62,19 @@
                 <td>@item.Email</td>
                 <td>@item.Department.DepartmentTitle</td>
                 <td>@item.Department.Organization.OrganizationTitle</td>
-                <td>@Html.ActionLink("редактировать", "Edit", "Redactor", new {EmployeeId= item.EmployeeId, }, new { @class = "btn btn-warning" })</td>
+                <td>@Html.ActionLink("редактировать", "Edit", "Redactor", 
+                   new {EmployeeId= item.EmployeeId, },
+                   new { @class = "btn btn-warning" })</td>
             </tr>
 }
 
         </tbody>
     </table>
+</div>
+<div>
+    @Html.ActionLink("Добавить сотрудника", "Edit", "Redactor",
+                       new { EmployeeId = 0, }, 
+                       new { @class = "btn btn-warning" })
 </div>
 
 

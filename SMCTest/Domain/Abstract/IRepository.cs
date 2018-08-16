@@ -12,6 +12,7 @@ namespace Domain.Abstract
         IEnumerable<Department> Departments();
         IEnumerable<Organization> Organizations();
          void EditEmployer(Employee employee);
+        void CreateEmployee(Employee employee);
     }
 
     
