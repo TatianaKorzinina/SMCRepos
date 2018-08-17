@@ -43,14 +43,29 @@ namespace Domain.Concrete
             };
         }
 
+        public IEnumerable<Log> Logs()
+        {
+            using (var context = new SMCContext())
+            {
+                var res = context.Logs.Include("LogType").Include("Employee").ToList();
+                return res;
+            };
+        }
+
         public void EditEmployer(Employee employee)
         {
             using (var context = new SMCContext())
             {
-                var emp = context.Employes.Find(employee.EmployeeId);
+                var emp = context.Employes.
+                    Include("Department").Include("Department.Organization").
+                    FirstOrDefault(x => x.EmployeeId == employee.EmployeeId);
+                    
 
                 Log log = new Log();
-                
+                if (emp == null)
+                {
+                    CreateEmployee(employee, log);
+                }
 
                 if (emp != null)
                 {
@@ -60,23 +75,55 @@ namespace Domain.Concrete
                         emp.FirstName = employee.FirstName;
                         
                     }
-                    emp.MiddleName = employee.MiddleName;
-                    emp.LastName = employee.LastName;
-                    emp.Email = employee.Email;
-                    emp.Department = context.Departments.Find(keyValues: employee.Department.DepartmentId);
-                    if (log != null)
+                    if (emp.MiddleName != employee.MiddleName)
+                    {
+                        log.MiddleName = emp.MiddleName;
+                        emp.MiddleName = employee.MiddleName;
+                    }
+
+                    if (emp.LastName != employee.LastName)
+                    {
+                        log.LastName = emp.LastName;
+                        emp.LastName = employee.LastName;
+                    }
+                    if (emp.Email != employee.Email)
+                    {
+                        log.Email = emp.Email;
+                        emp.Email = employee.Email;
+                    }
+                    if (emp.Department.DepartmentId != employee.Department.DepartmentId)
+                    {
+                        log.Department = emp.Department.DepartmentTitle;
+                        if (emp.Department.Organization.OrganizationID != employee.Department.
+                            Organization.OrganizationID)
+                        {
+                            log.Organization = emp.Department.Organization.OrganizationTitle;
+                        }
+
+                        emp.Department = context.Departments
+                            .Find(keyValues: employee.Department.DepartmentId);
+                        
+                    }
+                   
+                    if (log.FirstName != null || log.MiddleName != null
+                        || log.LastName != null
+                        || log.Email != null || 
+                        log.Department != null || log.Organization!= null )
                     {
                         log.dateTime = DateTime.Now;
+                        log.Employee = emp;
+                        log.LogType = context.LogTypes
+                            .FirstOrDefault(x=>x.Type=="редактирование данных сотрудника");
                         context.Logs.Add(log);
                     }
                     context.SaveChanges();
                 }
-                else CreateEmployee(employee);
+                
                 
             }
 
         }
-        public void CreateEmployee(Employee employee)
+         void CreateEmployee(Employee employee, Log log)
         {
             using (var context = new SMCContext())
             {
@@ -88,7 +135,16 @@ namespace Domain.Concrete
                     Email = employee.Email,
                     Department = context.Departments.Find(keyValues: employee.Department.DepartmentId)
                 };
+                log.FirstName = employee.FirstName;
+                log.MiddleName = employee.MiddleName;
+                log.LastName = employee.LastName;
+                log.Email = employee.Email;
+                log.Department = employee.Department.DepartmentTitle;
+                log.Organization = employee.Department.Organization.OrganizationTitle;
+                log.dateTime = DateTime.Now;
+                log.LogType = context.LogTypes.FirstOrDefault(x => x.Type == "добавлен новый сотрудник");
                 context.Employes.Add(emp);
+                context.Logs.Add(log);
                 context.SaveChanges();
 
 

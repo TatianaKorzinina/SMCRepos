@@ -157,6 +157,7 @@
     <Content Include="Views\Redactor\Edit.cshtml" />
     <Content Include="Views\Redactor\Completed.cshtml" />
     <Content Include="Views\Shared\GetDepartments.cshtml" />
+    <Content Include="Views\Home\ShowLog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

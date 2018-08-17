@@ -12,7 +12,7 @@ namespace WebUI.Controllers
     public class HomeController : Controller
     {
         private IRepository repository;
-        public int pageSise = 4;
+        public int pageSise = 10;
         
         public HomeController(IRepository repo)
         {
@@ -32,6 +32,17 @@ namespace WebUI.Controllers
             ViewBag.TotalPages = (int)Math.Ceiling((decimal) res.ToArray().Length / pageSise);
             return View(sear);
            
+        }
+
+        public ActionResult ShowLog(int page=1)
+        {
+            ViewBag.p = page;
+            var res = repository.Logs();
+               // .Skip((page - 1) * pageSise)
+               //.Take(pageSise);
+            ViewBag.TotalPages = (int)Math
+                .Ceiling((decimal)res.ToArray().Length / pageSise);
+            return View(res); 
         }
     }
 }

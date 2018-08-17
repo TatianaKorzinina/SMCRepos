@@ -1,0 +1,86 @@
+﻿@using Domain
+@model IEnumerable<Log>
+
+@{
+    ViewBag.Title = "ShowLog";
+}
+
+<h2>Список изменений</h2>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+       
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li>
+                <a class=@(ViewBag.p == i ? "btn btn-primary" : "btn-default") href="http://localhost:55182/Home/ShowLog/page @i">@i</a>
+            </li>
+        }
+
+        
+    </ul>
+</nav>
+
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>дата</th>
+                <th>тип изменения</th>
+                <th>изменения</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>@item.dateTime</tr>
+                <tr>@item.LogType.Type</tr>
+                <tr>
+
+                    @if (item.FirstName != null)
+    {
+                @item.FirstName
+}
+
+                    на @item.Employee.FirstName 
+                    ,
+                    @if (item.MiddleName != null)
+    {
+                @item.MiddleName
+}
+                    на @item.Employee.MiddleName
+                    ,
+
+                    @if (item.LastName != null)
+    {
+                @item.LastName
+}
+                    на @item.Employee.LastName
+                    ,
+                    @if (item.Email != null)
+    {
+                @item.Email
+}
+                    на @item.Employee.Email
+                    ,
+                    @if (item.Department != null)
+    {
+                @item.Department
+}
+                    на @item.Employee.Department
+                    ,
+                    @if (item.Organization != null)
+    {
+                @item.Organization
+}
+                    на @item.Employee.Department.Organization.OrganizationTitle
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
+
+

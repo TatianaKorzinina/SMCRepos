@@ -11,8 +11,9 @@ namespace Domain.Abstract
         IEnumerable<Employee> Employers();
         IEnumerable<Department> Departments();
         IEnumerable<Organization> Organizations();
+        IEnumerable<Log> Logs();
          void EditEmployer(Employee employee);
-        void CreateEmployee(Employee employee);
+        //void CreateEmployee(Employee employee);
     }
 
     
