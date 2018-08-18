@@ -78,6 +78,7 @@ namespace Domain.Concrete
 
                     }
                     else log.FirstName = employee.FirstName;
+
                     if (emp.MiddleName != employee.MiddleName)
                     {
                         log.MiddleName = $"{emp.MiddleName}=>{employee.MiddleName}";
@@ -111,7 +112,6 @@ namespace Domain.Concrete
 
                         emp.Department = context.Departments
                             .Find(keyValues: employee.Department.DepartmentId);
-
                     }
                     else
                     {
@@ -132,7 +132,6 @@ namespace Domain.Concrete
                     context.SaveChanges();
                 }
                 
-                
             }
 
         }
@@ -148,6 +147,7 @@ namespace Domain.Concrete
                     Email = employee.Email,
                     Department = context.Departments.Find(keyValues: employee.Department.DepartmentId)
                 };
+
                 log.FirstName = employee.FirstName;
                 log.MiddleName = employee.MiddleName;
                 log.LastName = employee.LastName;
@@ -159,12 +159,9 @@ namespace Domain.Concrete
                 context.Employes.Add(emp);
                 context.Logs.Add(log);
                 context.SaveChanges();
-
-
             }
 
         }
 
-        
     }
 }
