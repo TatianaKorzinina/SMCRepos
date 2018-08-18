@@ -37,11 +37,12 @@ namespace WebUI.Controllers
         public ActionResult ShowLog(int page=1)
         {
             ViewBag.p = page;
-            var res = repository.Logs();
-               // .Skip((page - 1) * pageSise)
-               //.Take(pageSise);
+            var logs = repository.Logs();
+            var res = logs
+                .Skip((page - 1) * pageSise)
+               .Take(pageSise);
             ViewBag.TotalPages = (int)Math
-                .Ceiling((decimal)res.ToArray().Length / pageSise);
+                .Ceiling((decimal)logs.ToArray().Length / pageSise);
             return View(res); 
         }
     }

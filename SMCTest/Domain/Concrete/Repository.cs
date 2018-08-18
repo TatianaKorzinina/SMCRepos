@@ -47,7 +47,9 @@ namespace Domain.Concrete
         {
             using (var context = new SMCContext())
             {
-                var res = context.Logs.Include("LogType").Include("Employee").ToList();
+                var res = context.Logs.Include("LogType")
+                    .Include("Employee").Include("Employee.Department")
+                    .Include("Employee.Department.Organization").ToList();
                 return res;
             };
         }
@@ -71,44 +73,55 @@ namespace Domain.Concrete
                 {
                     if (emp.FirstName != employee.FirstName)
                     {
-                        log.FirstName = emp.FirstName;
+                        log.FirstName = $"{emp.FirstName}=>{employee.FirstName}";
                         emp.FirstName = employee.FirstName;
-                        
+
                     }
+                    else log.FirstName = employee.FirstName;
                     if (emp.MiddleName != employee.MiddleName)
                     {
-                        log.MiddleName = emp.MiddleName;
+                        log.MiddleName = $"{emp.MiddleName}=>{employee.MiddleName}";
                         emp.MiddleName = employee.MiddleName;
                     }
+                    else log.MiddleName = employee.MiddleName;
 
                     if (emp.LastName != employee.LastName)
                     {
-                        log.LastName = emp.LastName;
+                        log.LastName = $"{emp.LastName}=>{employee.LastName}";
                         emp.LastName = employee.LastName;
                     }
+                    else log.LastName = employee.LastName;
+
                     if (emp.Email != employee.Email)
                     {
-                        log.Email = emp.Email;
+                        log.Email = $"{emp.Email}=>{employee.Email}";
                         emp.Email = employee.Email;
                     }
+                    else log.Email = employee.Email;
+
                     if (emp.Department.DepartmentId != employee.Department.DepartmentId)
                     {
-                        log.Department = emp.Department.DepartmentTitle;
+                        log.Department = $"{emp.Department.DepartmentTitle}=>{employee.Department.DepartmentTitle}";
                         if (emp.Department.Organization.OrganizationID != employee.Department.
                             Organization.OrganizationID)
                         {
-                            log.Organization = emp.Department.Organization.OrganizationTitle;
+                            log.Organization = $"{emp.Department.Organization.OrganizationTitle}=>{employee.Department.Organization.OrganizationTitle}";
                         }
+                        else log.Organization = emp.Department.Organization.OrganizationTitle;
 
                         emp.Department = context.Departments
                             .Find(keyValues: employee.Department.DepartmentId);
-                        
+
                     }
-                   
-                    if (log.FirstName != null || log.MiddleName != null
-                        || log.LastName != null
-                        || log.Email != null || 
-                        log.Department != null || log.Organization!= null )
+                    else
+                    {
+                        log.Department = employee.Department.DepartmentTitle;
+                        log.Organization = emp.Department.Organization.OrganizationTitle;
+                    }
+                        if (log.FirstName != emp.FirstName || log.MiddleName != emp.MiddleName
+                        || log.LastName != emp.LastName
+                        || log.Email != emp.Email || 
+                        log.Department != emp.Department.DepartmentTitle )
                     {
                         log.dateTime = DateTime.Now;
                         log.Employee = emp;

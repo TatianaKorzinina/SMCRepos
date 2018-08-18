@@ -3,13 +3,16 @@
 
 @{
     ViewBag.Title = "ShowLog";
+    ViewBag.Comma = ", ";
+    ViewBag.Space = " ";
+    ViewBag.Arrow = "=>";
 }
 
 <h2>Список изменений</h2>
 
 <nav aria-label="Page navigation">
     <ul class="pagination">
-       
+
         @for (int i = 1; i <= ViewBag.TotalPages; i++)
         {
             <li>
@@ -17,7 +20,7 @@
             </li>
         }
 
-        
+
     </ul>
 </nav>
 
@@ -33,54 +36,22 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>@item.dateTime</tr>
-                <tr>@item.LogType.Type</tr>
+
                 <tr>
-
-                    @if (item.FirstName != null)
-    {
-                @item.FirstName
-}
-
-                    на @item.Employee.FirstName 
-                    ,
-                    @if (item.MiddleName != null)
-    {
-                @item.MiddleName
-}
-                    на @item.Employee.MiddleName
-                    ,
-
-                    @if (item.LastName != null)
-    {
-                @item.LastName
-}
-                    на @item.Employee.LastName
-                    ,
-                    @if (item.Email != null)
-    {
-                @item.Email
-}
-                    на @item.Employee.Email
-                    ,
-                    @if (item.Department != null)
-    {
-                @item.Department
-}
-                    на @item.Employee.Department
-                    ,
-                    @if (item.Organization != null)
-    {
-                @item.Organization
-}
-                    на @item.Employee.Department.Organization.OrganizationTitle
-
+                    <td>@item.dateTime</td>
+                    <td>@item.LogType.Type</td>
+                    <td>
+                      @($"{item.FirstName} {item.MiddleName} {item.LastName}, {item.Email}, {item.Organization}, {item.Department}")
+                    </td>
                 </tr>
             }
         </tbody>
 
     </table>
 
+</div>
+<div>
+    @Html.ActionLink("вернуться на главную","Index",null,new { @class="btn btn-primary"})
 </div>
 
 
