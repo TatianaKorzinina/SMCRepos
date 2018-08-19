@@ -9,8 +9,8 @@
     <ul class="pagination">  
         @for (int i = 1; i <= ViewBag.TotalPages; i++)
         {
-            <li><a class=
-                   @(ViewBag.p == i ? "btn btn-primary" : "btn-default")  href="http://localhost:55182/Home/Index/page @i">@i</a></li>
+            <li>@Html.ActionLink(i.ToString(), "Index", new { page=i}, new { @class= ViewBag.p == i ? " btn" : "btn-default"})
+            </li>
         }
     </ul>
 </nav>
