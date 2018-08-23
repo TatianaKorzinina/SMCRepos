@@ -27,6 +27,8 @@ namespace WebUI.Controllers
                 employee = repository.Employers()
                 .FirstOrDefault(x => x.EmployeeId == employeeId);
 
+                if (employee == null) { return View("EditError"); }
+
                 ViewBag.Org = repository.Organizations();
                 ViewBag.Dep = repository.Departments()
                     .Where(x => x.Organization.OrganizationID == employee.Department.Organization.OrganizationID);
